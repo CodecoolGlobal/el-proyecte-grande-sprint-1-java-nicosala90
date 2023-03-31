@@ -16,7 +16,8 @@ public class UserController {
     }
 
     @PostMapping("/actual-user")
-        public double addUser(@RequestBody User user){
+    public double addUser(@RequestBody User user){
+        healthState.addUser(user);
         return user.calculateBMI();
     }
 

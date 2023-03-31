@@ -13,8 +13,8 @@ public class HealthState {
     public HealthState() {
         this.users = new ArrayList<>();
     }
-    public void addUser(int age, Gender gender, double weight, double height){
-        users.add(new User(age, gender, weight, height));
+    public void addUser(User user){
+        users.add(user);
     }
     public User getUserById(int id){
         return users.stream().filter(user -> user.getId() == id).findFirst().orElseThrow();
