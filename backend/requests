@@ -15,3 +15,16 @@ Content-Type: application/json
 # Get the created user from the previous request
 
 GET http://localhost:8080/user/23
+
+# Request with wrong data
+
+POST http://localhost:8080/user/actual-user
+Content-Type: application/json
+
+{
+  "id": "23",
+  "age": "36",
+  "gender": "MALE",
+  "weight": "-95",
+  "height": "1.80"
+}

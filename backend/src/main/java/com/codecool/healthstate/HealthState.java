@@ -1,10 +1,10 @@
 package com.codecool.healthstate;
 
-import com.codecool.data.user.Gender;
-import com.codecool.data.user.User;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.codecool.controller.UserNotFoundException;
+import com.codecool.data.user.User;
 
 public class HealthState {
 
@@ -17,7 +17,8 @@ public class HealthState {
         users.add(user);
     }
     public User getUserById(int id){
-        return users.stream().filter(user -> user.getId() == id).findFirst().orElseThrow();
+        return users.stream().filter(user -> user.getId() == id).findFirst()
+                .orElseThrow(() -> new UserNotFoundException(id));
     }
 
 }
