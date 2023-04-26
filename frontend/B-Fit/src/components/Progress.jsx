@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 
-function Progress() {
+function Progress(clientId) {
   const [listBMI, setListBMI] = useState({});
 
   useEffect((clientId) => {

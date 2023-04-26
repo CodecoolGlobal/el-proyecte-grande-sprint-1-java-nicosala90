@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BMIValue from "./BMIValue";
 import SemiCircleIndicator from "./SemiCircleIndicator";
 
@@ -14,11 +14,12 @@ function InputCard() {
 
     function handleClientIdChange(e) {
         setClient
-            ({
-                ...client,
-                clientId: e.target.value
-            })
+        ({
+            ...client,
+            clientId: e.target.value
+        })
     }
+    
     function handleDateOfBirthChange(e) {
         setClient
             ({
@@ -42,6 +43,7 @@ function InputCard() {
     }
 
     function submitClientData(client) {
+
         if (client["dateOfBirth"] !== "" && client["weight"] !== "" && client["height"] !== "") {
             if (client.clientId === "") { client.clientId = 0; } else { client.clientId = parseFloat(client.clientId); }
             const clientData = {
@@ -77,9 +79,19 @@ function InputCard() {
         <div className="container-input">
             <div id="input-table">
                 <div id="input-fields">
+                    <label><small>client id number:</small></label>
                     <input placeholder="client id" type="number" value={client.clientId} onChange={handleClientIdChange}></input>
-                    <input placeholder="dateOfBirth" type="date" value={client.dateOfBirth} onChange={handleDateOfBirthChange}></input>
+{/*                     {client.clientId === ""
+                        ? */}
+                        <>
+                            <label><small>date of Birth</small></label>
+                            <input placeholder="dateOfBirth" type="date" value={client.dateOfBirth} onChange={handleDateOfBirthChange}></input>
+                        </>
+{/*                         : <></>
+                    } */}
+                    <label><small><br></br>weight in gramm:</small></label>
                     <input placeholder="weight" type="number" value={client.weight} onChange={handleWeightChange}></input>
+                    <label><small>height in meter:</small></label>
                     <input placeholder="height" type="number" value={client.height} onChange={handleHeightChange}></input>
                     <button className="submitBtn" onClick={() => { submitClientData(client); }}>Calculate</button>
 
@@ -103,4 +115,5 @@ function InputCard() {
         </div>
     )
 }
+
 export default InputCard;

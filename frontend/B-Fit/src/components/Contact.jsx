@@ -10,7 +10,7 @@ function Contact() {
 
     function resetState() {
         setShow(!show);
-        setPerson({
+        setMessage({
             "clientName": "",
             "email": "",
             "subject": "",
@@ -18,7 +18,7 @@ function Contact() {
         });
     }
 
-    const [person, setPerson] = useState({
+    const [message, setMessage] = useState({
         "clientName": "",
         "email": "",
         "subject": "",
@@ -26,31 +26,45 @@ function Contact() {
     });
 
     function handleClientNameChange(e) {
-        setPerson({
-            ...person,
+        setMessage({
+            ...message,
             clientName: e.target.value
         });
     }
 
     function handleEmailChange(e) {
-        setPerson({
-            ...person,
+        setMessage({
+            ...message,
             email: e.target.value
         });
     }
 
     function handleSubjectChange(e) {
-        setPerson({
-            ...person,
+        setMessage({
+            ...message,
             subject: e.target.value
         });
     }
 
     function handleMessageChange(e) {
-        setPerson({
-            ...person,
+        setMessage({
+            ...message,
             message: e.target.value
         });
+    }
+
+    function sendMessage() {
+        console.log("Dear " + message.clientName + " thanks for your attantion!\n" +
+            "Your message was : " + message.message);
+
+        fetch('/api/client/message', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(message)
+        })
+
     }
 
     return (
@@ -59,19 +73,26 @@ function Contact() {
             {show ? (<div id="login-table" >
                 <div id="login-fields">
                     <label>
-                        <input placeholder="Client name" value={person.clientName} onChange={handleClientNameChange} />
+                        <input placeholder="Client name" value={message.clientName} onChange={handleClientNameChange} />
                     </label>
                     <label>
-                        <input placeholder="E-mail" value={person.email} onChange={handleEmailChange} />
+                        <input placeholder="E-mail" value={message.email} onChange={handleEmailChange} />
                     </label>
                     <label>
-                        <input placeholder="Subject" value={person.subject} onChange={handleSubjectChange} />
+                        <input placeholder="Subject" value={message.subject} onChange={handleSubjectChange} />
                     </label>
                     <label>
-                        <textarea placeholder="Message" rows="10" value={person.message} onChange={handleMessageChange} />
+                        <textarea placeholder="Message" rows="10" value={message.message} onChange={handleMessageChange} />
                     </label>
                     <div>
-                        <button className="submitBtn" onClick={() => { changeState(); console.log(person) }}>Send</button>
+                        <button className="submitBtn" onClick={() => {
+                            if (message.clientName === "" || message.email === "" || message.subject === "" || message.message === "") {
+                                console.log("Data is missing!");
+                            } else {
+                                changeState();
+                                sendMessage();
+                            }
+                        }}>Send</button>
                     </div>
                 </div>
             </div>

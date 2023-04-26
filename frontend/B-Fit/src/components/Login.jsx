@@ -39,15 +39,19 @@ function Login() {
                 },
                 body: JSON.stringify(clientData)
             })
-                .then(res => res.json())
-                .then(res => setValue(res));
-
+/*
+             .then(res => res.json())
+             .then(res => setValue(res));
+*/
             setClient
                 ({
                     "clientName": "",
                     "password": ""
                 });
 
+        }
+        else {
+            console.log("Data is missing!")
         }
     }
 
