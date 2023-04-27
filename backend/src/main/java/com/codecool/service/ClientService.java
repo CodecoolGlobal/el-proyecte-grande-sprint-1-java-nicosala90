@@ -3,8 +3,10 @@ package com.codecool.service;
 import com.codecool.model.BMI;
 import com.codecool.model.Client;
 import com.codecool.logic.Calculator;
+import com.codecool.model.Message;
 import com.codecool.repository_DAO.BMIRepository;
 import com.codecool.repository_DAO.ClientRepository;
+import com.codecool.repository_DAO.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,17 +22,34 @@ public class ClientService {
     private BMIRepository bmiRepository;
 
     private Calculator calculator;
+    private MessageRepository messageRepository;
 
     @Autowired
-    public ClientService(ClientRepository clientRepository, BMIRepository bmiRepository, Calculator calculator) {
+    public ClientService(ClientRepository clientRepository, BMIRepository bmiRepository, Calculator calculator, MessageRepository messageRepository) {
         this.clientRepository = clientRepository;
         this.bmiRepository = bmiRepository;
         this.calculator = calculator;
+        this.messageRepository = messageRepository;
     }
 
 
+
+
     public void addClient(Client client) {
+        System.out.println("Client saved");
         clientRepository.save(client);
+    }
+
+    public Client clientChecker(Client clientNameAndPassword){
+        List<Client> clients = clientRepository.findAll();
+        Client actualClient = clients.stream()
+                .filter(client -> client.getClientName().equals(clientNameAndPassword.getClientName()))
+                .findFirst()
+                .orElseThrow();
+        if(actualClient.getPassword().equals(clientNameAndPassword.getPassword())){
+        return actualClient;
+        }
+        return null;
     }
 
     public List<Client> getAllClient() {
@@ -55,6 +74,7 @@ public class ClientService {
                     .client(client)
                     .build();
             client.addCalculatedBMI(bmi);
+            System.out.println("BMI saved");
             bmiRepository.save(bmi);
             return BMIResult;
         }
@@ -69,4 +89,11 @@ public class ClientService {
                 .collect(Collectors.toList());
     }
 
+    public Message saveMessage(Message message) {
+       return messageRepository.save(message);
+    }
+
+    public List<Message> findAllMessage() {
+       return messageRepository.findAll();
+    }
 }

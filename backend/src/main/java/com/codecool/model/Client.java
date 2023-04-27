@@ -22,7 +22,7 @@ public class Client {
     private String clientName;
     private String email;
     private String password;
-    private LocalDate birthdayDate;
+    private LocalDate dateOfBirth;
     private double weight;
     private double height;
 
@@ -30,15 +30,15 @@ public class Client {
     private List<BMI> bmiValues = new ArrayList<>();
 
     @Autowired
-    public Client(String clientName, String email, String password, LocalDate birthdayDate) {
+    public Client(String clientName, String email, String password, LocalDate dateOfBirth) {
         this.clientName = clientName;
         this.email = email;
         this.password = password;
-        this.birthdayDate = birthdayDate;
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public Client(LocalDate birthdayDate, double weight, double height) {
-        this.birthdayDate = birthdayDate;
+    public Client(LocalDate dateOfBirth, double weight, double height) {
+        this.dateOfBirth = dateOfBirth;
         this.weight = weight;
         this.height = height;
     }
@@ -54,8 +54,7 @@ public class Client {
                 ", clientName='" + clientName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", birthdayDate=" + birthdayDate +
-                ", weight=" + weight +
+                ", birthdayDate=" + dateOfBirth +
                 ", height=" + height +
                 ", bmiValues=" + bmiValues +
                 '}';
