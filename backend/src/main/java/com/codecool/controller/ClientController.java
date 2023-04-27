@@ -34,7 +34,6 @@ public class ClientController {
     @PostMapping("/sign-in")
     public int addClient(@RequestBody Client newClient) {
         System.out.println(newClient);
-      //  newClient.setDateOfBirth((LocalDate) newClient.getDateOfBirth());
         clientService.addClient(newClient);
         return 1;
     }

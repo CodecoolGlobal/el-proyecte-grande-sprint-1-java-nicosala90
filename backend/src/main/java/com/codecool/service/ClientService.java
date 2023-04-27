@@ -32,22 +32,22 @@ public class ClientService {
         this.messageRepository = messageRepository;
     }
 
-
-
-
     public void addClient(Client client) {
         System.out.println("Client saved");
         clientRepository.save(client);
     }
 
-    public Client clientChecker(Client clientNameAndPassword){
-        List<Client> clients = clientRepository.findAll();
-        Client actualClient = clients.stream()
-                .filter(client -> client.getClientName().equals(clientNameAndPassword.getClientName()))
-                .findFirst()
-                .orElseThrow();
-        if(actualClient.getPassword().equals(clientNameAndPassword.getPassword())){
-        return actualClient;
+    public Client clientChecker(Client clientNameAndPassword) {
+        if (getClientByName(clientNameAndPassword.getClientName()) != null) {
+            List<Client> clients = clientRepository.findAll();
+            Client actualClient = clients.stream()
+                    .filter(client -> client.getClientName().equals(clientNameAndPassword.getClientName()))
+                    .findFirst()
+                    .orElseThrow();
+            if (actualClient.getPassword().equals(clientNameAndPassword.getPassword())) {
+                System.out.println(actualClient + " hhhhhhhuuuurrrááá !!!!");
+                return actualClient;
+            }
         }
         return null;
     }
@@ -56,12 +56,16 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public void deleteClient(Long id) {
-        clientRepository.deleteById(id);
-    }
-
     public Client getClientById(Long id) {
         return clientRepository.findById(id).orElseThrow();
+    }
+
+    public Client getClientByName(String ClientName) {
+        return clientRepository.findClientsByClientName(ClientName);
+    }
+
+    public void deleteClient(Long id) {
+        clientRepository.deleteById(id);
     }
 
     public double calculateBMI(Client client, Long id) {
@@ -90,10 +94,10 @@ public class ClientService {
     }
 
     public Message saveMessage(Message message) {
-       return messageRepository.save(message);
+        return messageRepository.save(message);
     }
 
     public List<Message> findAllMessage() {
-       return messageRepository.findAll();
+        return messageRepository.findAll();
     }
 }
