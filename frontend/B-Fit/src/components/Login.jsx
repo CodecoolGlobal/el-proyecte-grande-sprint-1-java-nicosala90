@@ -32,17 +32,17 @@ function Login() {
                 password: client.password
             };
 
-            fetch('/api/client/client-checker', {
+            fetch('/api/client/log-in', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(clientData)
             })
-/*
+
              .then(res => res.json())
              .then(res => setValue(res));
-*/
+
             setClient
                 ({
                     "clientName": "",
