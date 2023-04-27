@@ -24,7 +24,7 @@ public class ClientController {
         return clientService.calculateBMI(clientData, id);
     }
 
-    @GetMapping("/bmi-list/{id}")
+    @GetMapping("/bmi-list/{id}")//@PreAuthorize("hasAnyRole(ROLE_REGISTERED)") or you can use antMatchers instead of this annotations
     public List<BMI> getBMIValuesByClient(@PathVariable Long id) {
         return clientService.getBMIValuesSortByDate(id);
     }

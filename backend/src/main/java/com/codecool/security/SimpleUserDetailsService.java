@@ -3,33 +3,35 @@ package com.codecool.security;
 import com.codecool.model.Client;
 import com.codecool.repository_DAO.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-
-@EnableWebSecurity
-@Configuration
+@Service
 public class SimpleUserDetailsService implements UserDetailsService {
+
+    private final ClientRepository clientRepository;
+
     @Autowired
-    private ClientRepository clientRepository;
+    public SimpleUserDetailsService(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        String[] usernameAndDomain = StringUtils.split(
+     /*   String[] usernameAndDomain = StringUtils.split(
                 username, String.valueOf(Character.LINE_SEPARATOR));
         if (usernameAndDomain == null || usernameAndDomain.length != 2) {
             throw new UsernameNotFoundException("Username and domain must be provided");
-        }
-        Client client = clientRepository.find (usernameAndDomain[0], usernameAndDomain[1]);
+        }*/
+        Client client = clientRepository.findClientByClientName(username);
         if (client == null) {
-            throw new UsernameNotFoundException(
-                    String.format("Username not found for domain, username=%s, domain=%s",
-                            usernameAndDomain[0], usernameAndDomain[1]));
+            throw new UsernameNotFoundException(String.format("Username not found for domain, username=%s, domain=%s"));
         }
         return client;
     }
 }
+
