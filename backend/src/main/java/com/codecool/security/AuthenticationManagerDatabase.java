@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
@@ -31,6 +32,10 @@ public class AuthenticationManagerDatabase implements AuthenticationManager {
         String password = (String) authentication.getCredentials();
         Client client = clientService.getClientByClientName(username);
         logger.info("client is: {}", client);
-        return null;
+        //TODO hash + salt password
+        if(password.equals(client.getPassword())){
+            return authentication;
+        }
+        throw new BadCredentialsException("Bad credentials");
     }
 }
