@@ -57,7 +57,7 @@ public class Client {
                 ", birthdayDate=" + birthdayDate +
                 ", weight=" + weight +
                 ", height=" + height +
-                ", bmiValues=" + bmiValues +
+                /*", bmiValues=" + getBmiValues() + */
                 '}';
     }
 }

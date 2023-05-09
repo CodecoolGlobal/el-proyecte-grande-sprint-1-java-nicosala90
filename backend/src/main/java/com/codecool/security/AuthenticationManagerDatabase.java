@@ -1,5 +1,6 @@
 package com.codecool.security;
 
+import com.codecool.model.Client;
 import com.codecool.service.ClientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,8 @@ public class AuthenticationManagerDatabase implements AuthenticationManager {
         //logger.info("Type of principal : {}", authentication.getPrincipal().getClass());
         String username = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
-
+        Client client = clientService.getClientByClientName(username);
+        logger.info("client is: {}", client);
         return null;
     }
 }

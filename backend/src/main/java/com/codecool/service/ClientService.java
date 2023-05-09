@@ -33,6 +33,10 @@ public class ClientService {
         clientRepository.save(client);
     }
 
+    public Client getClientByClientName(String clientName) {
+        return clientRepository.findClientByClientName(clientName);
+    }
+
     public List<Client> getAllClient() {
         return clientRepository.findAll();
     }
