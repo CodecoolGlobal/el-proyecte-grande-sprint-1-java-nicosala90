@@ -22,11 +22,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .httpBasic().disable()
+                .formLogin().disable()
                 .csrf().disable()
                 .addFilter(new PasswordAuthenticationFilter(authenticationManager))
                 .build();
 
     }
-
-
 }

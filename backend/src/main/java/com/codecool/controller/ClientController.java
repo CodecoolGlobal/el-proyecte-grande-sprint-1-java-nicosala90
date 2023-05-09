@@ -4,6 +4,7 @@ import com.codecool.model.BMI;
 import com.codecool.model.Client;
 import com.codecool.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,4 +53,6 @@ public class ClientController {
     public void deleteClientById(@PathVariable Long id) {
         clientService.deleteClient(id);
     }
+
+
 }
