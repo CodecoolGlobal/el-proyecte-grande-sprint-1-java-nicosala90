@@ -4,14 +4,14 @@ function Chart({ listBMI }) {
 
   return (
     <LineChart
-      width={1000}
-      height={400}
+      width={1320}
+      height={700}
       data={listBMI}
       margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       style={{ backgroundColor: 'white' }}
     >
       <YAxis dataKey="bmiValues"  label={{ value: 'BMI', angle: -90, position: 'insideLeft', fontSize: 15}} tick={{ fontSize: 20 }}/>
-      <XAxis  dataKey="localDate" label={{  position: 'insideBottom', fontSize: 15 }} tick={{ fontSize: 20 }}/>
+      <XAxis  dataKey="localDate" label={{  position: 'insideBottom', fontSize: 15 }} tick={{ fontSize: 10 }}/>
       <CartesianGrid strokeDasharray="3 3" />
       <Tooltip />
       <Legend verticalAlign="top" height={36} />

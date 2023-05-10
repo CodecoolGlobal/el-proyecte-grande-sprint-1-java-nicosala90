@@ -20,7 +20,7 @@ body {
   justify-content: space-between;
 }
 
-#nav-bar>div {
+#nav-bar > div {
   margin-left: 10px;
   display: flex;
 }
@@ -37,6 +37,46 @@ body {
   padding: 10px;
   margin: 10px;
   font-size: 20px;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100px;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  background-color: rgb(63, 69, 79);
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.navbar a {
+  float: left;
+  font-size: 15px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 #footer {
@@ -107,14 +147,13 @@ textarea {
 }
 
 #login-fields {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-size: 25px;
   border: solid 5px sandybrown;
   align-items: flex-end;
   border-radius: 15px;
   padding: 10px;
   margin-right: 10px;
-
 }
 
 #input-fields {
@@ -152,7 +191,7 @@ textarea {
 
 #BMI-value {
   font-size: 30px;
-  font-weight: 900;
+  font-weight: 90px;
   color: rgb(243, 117, 49);
   border: solid 2px sandybrown;
   border-radius: 10px;
@@ -163,50 +202,24 @@ textarea {
   background-color: rgb(63, 69, 79);
   color: white;
   position: absolute;
+  left: 60px;
+  top: 130px;
+  width: 15%;
+  height: 50%;
   border: solid 5px sandybrown;
-  border-radius: 10px;
-  left: 50px;
-  top: 120px;
-  width: auto;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  table-layout: fixed;
-  margin: 10px;
-  padding: 10px;
-}
-
-.list-BMI h2 {
-  margin: 0;
-  font-size: 25px;
-}
-
-.list-BMI table {
-  border-collapse: collapse;
-  width: 100%;
-  max-width: 380px;
+  border-radius: 5px;
+  padding: 20px;
 }
 
 .list-BMI th,
 .list-BMI td {
   font-size: 30px;
   padding: 10px;
-  text-align: justify;
   border: 3px solid sandybrown;
-}
-
-.list-BMI th:nth-child(2) {
-  padding-left: 20px;
 }
 
 .list-BMI th {
   font-weight: normal;
-}
-
-.list-BMI td:first-child {
-  font-weight: bold;
-  text-align: left;
 }
 
 .list-BMI tr:first-child th:first-child {
@@ -225,55 +238,14 @@ textarea {
   border-bottom-right-radius: 10px;
 }
 
-
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-.dropdown .dropbtn {
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100px;
-  min-width: 160px;
-  z-index: 1;
-}
-
-.dropdown-content a {
-  background-color: rgb(63, 69, 79);
-  color: white;
-  padding: 12px 16px;
-  text-decoration: none;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.navbar a {
-  float: left;
-  font-size: 15px;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
 .chart {
   background-color: rgb(63, 69, 79);
   color: white;
   position: absolute;
   top: 180px;
   left: 500px;
-  width: 1000px;
-  height: 400px;
+  max-width: 51,5%;
+  height: 63%;
   display: flex;
   border: solid 5px sandybrown;
   padding: 10px;

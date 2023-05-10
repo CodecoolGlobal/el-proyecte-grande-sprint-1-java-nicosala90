@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Chart from "./Chart";
 
-function Progress() {
+function Progress(clientName) {
   const [listBMI, setListBMI] = useState({});
 
   useEffect((clientId) => {
-   // fetch(`/api/client/bmi-list/${clientId}`)
+    // fetch(`/api/client/bmi-list/${clientId}`)
     fetch(`/api/client/bmi-list/1`)
       .then(response => response.json())
       .catch(error => {
@@ -27,17 +27,15 @@ function Progress() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            {Object.values(listBMI).map((bmi, index) =>
-              <tr>
-                <td key={index}>{bmi.localDate}</td>
-                <td >{bmi.bmiValues.toFixed(2)}</td>
-              </tr>)}
-          </tr>
+          {Object.values(listBMI).map((bmi, index) =>
+            <tr key={index}>
+              <td >{bmi.localDate}</td>
+              <td legend="BMI">{bmi.bmiValues.toFixed(2)}</td>
+            </tr>)}
         </tbody>
       </table>
       <div className="chart">
-        <Chart listBMI={listBMI}/>
+        <Chart listBMI={listBMI} />
       </div>
     </div>
   );
