@@ -13,5 +13,6 @@ public class AuthenticationSuccessHandlerJwt implements AuthenticationSuccessHan
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         response.getWriter().println("Hello " + authentication.getPrincipal());
+        response.getWriter().println("Hello " + authentication.getCredentials());
     }
 }

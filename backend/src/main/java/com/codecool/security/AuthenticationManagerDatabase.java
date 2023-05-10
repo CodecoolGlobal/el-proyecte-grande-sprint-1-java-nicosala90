@@ -33,6 +33,7 @@ public class AuthenticationManagerDatabase implements AuthenticationManager {
         String password = (String) authentication.getCredentials();
         Client client = clientService.getClientByClientName(username);
         logger.info("client is: {}", client);
+
         //TODO hash + salt password
         if(password.equals(client.getPassword())){
             return new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), authentication.getCredentials());
