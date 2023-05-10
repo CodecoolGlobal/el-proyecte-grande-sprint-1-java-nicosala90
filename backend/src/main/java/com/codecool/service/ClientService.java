@@ -59,10 +59,14 @@ public class ClientService {
                     .client(client)
                     .build();
             client.addCalculatedBMI(bmi);
-            bmiRepository.save(bmi);
+            saveBMI(bmi);
             return BMIResult;
         }
         return BMIResult;
+    }
+
+    public void saveBMI(BMI bmi){
+        bmiRepository.save(bmi);
     }
 
     public List<BMI> getBMIValuesSortByDate(Long id) {

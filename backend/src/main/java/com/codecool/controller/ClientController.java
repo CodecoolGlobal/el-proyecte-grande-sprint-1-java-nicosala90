@@ -21,7 +21,7 @@ public class ClientController {
 
     @PostMapping("/registeredBMI/{id}")
     public double saveBMI(@RequestBody Client clientData, @PathVariable Long id) {
-        System.out.println("BMI saved");
+        System.out.println(id>0 ? "BMI saved" : "BMI calculated");
         return clientService.calculateBMI(clientData, id);
     }
 

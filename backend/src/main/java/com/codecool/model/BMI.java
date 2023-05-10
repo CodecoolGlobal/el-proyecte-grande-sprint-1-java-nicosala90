@@ -25,4 +25,9 @@ public class BMI {
     @JoinColumn(name = "client_id")
     private Client client;
 
+    public BMI(double bmiValues, LocalDate localDate, Client client) {
+        this.bmiValues = bmiValues;
+        this.localDate = localDate;
+        this.client = client;
+    }
 }

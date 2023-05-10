@@ -37,6 +37,10 @@ public class Client {
         this.birthdayDate = birthdayDate;
     }
 
+    public Client(Long id) {
+        this.id = id;
+    }
+
     public Client(LocalDate birthdayDate, double weight, double height) {
         this.birthdayDate = birthdayDate;
         this.weight = weight;

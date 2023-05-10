@@ -10,6 +10,8 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginClient(@CurrentSecurityContext SecurityContext securityContext){
+        System.out.println("ez jön a FE-ről");
+        System.out.println(securityContext);
         String user = (String) securityContext.getAuthentication().getPrincipal();
         return "hello  " + user;
     }
