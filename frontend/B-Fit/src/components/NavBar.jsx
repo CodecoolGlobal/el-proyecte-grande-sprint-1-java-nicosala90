@@ -2,6 +2,14 @@ import { Link } from "react-router-dom";
 
 function NavBar() {
 
+    function handleLogOut() {
+        console.log("Béla")
+        localStorage.clear();
+        console.log(localStorage.getItem("jwtToken"))
+    }
+
+
+
     return (
         <div id="nav-bar">
             <div id="img-logo">
@@ -13,15 +21,16 @@ function NavBar() {
                         <i className="fa fa-caret-down"></i>
                     </button>
                     <div className="dropdown-content elements" >
-                    <Link className="link-component" to="/login">Login</Link>
-                    <Link className="link-component" to="/signin">Sign In</Link>
+                        <Link className="link-component" to="/login">Login</Link>
+                        <Link className="link-component" to="/signin">Sign In</Link>
+                        <Link className="link-component" to="/" onClick={handleLogOut}>Sign Out</Link> 
                     </div>
                 </div>
                 <Link className="link-component" to="/">Home</Link>
                 <Link className="link-component" to="/calculator">BMI Calculator</Link>
                 <Link className="link-component" to="/progress">Your Progress</Link>
                 <Link className="link-component" to="/contact">Contact</Link>
-                
+
             </div>
         </div>
     )

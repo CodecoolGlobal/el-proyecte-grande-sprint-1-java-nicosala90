@@ -49,7 +49,7 @@ function Login() {
                 })
                 .then(token => {
                     //the token is a string not a JSON object
-                    localStorage.setItem('jwtToken', token.split(',')[0]);
+                    localStorage.setItem('jwtToken', token);
                 })
                 .catch(error => {
                     console.error('There was a problem with the fetch operation:', error);
