@@ -7,6 +7,8 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,6 +31,7 @@ public class PasswordAuthenticationFilter extends UsernamePasswordAuthentication
 
     public AuthenticationManager authenticationManager;
 
+
     public PasswordAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
         //super(authenticationManager);
@@ -50,8 +53,7 @@ public class PasswordAuthenticationFilter extends UsernamePasswordAuthentication
             throw new AuthenticationServiceException(e.getMessage(), e);
         }
 
-        UsernamePasswordAuthenticationToken authRequest =
-                new UsernamePasswordAuthenticationToken(clientName, password);
+        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(clientName, password);
 
         return authenticationManager.authenticate(authRequest);
     }
@@ -67,9 +69,10 @@ public class PasswordAuthenticationFilter extends UsernamePasswordAuthentication
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(Algorithm.HMAC512(SECRET.getBytes()));
 
-        String body = (actualUser.getUsername()) + "Bearer " + token;
+        String body = (actualUser.getUsername()) + " Bearer " + token;
 
         response.getWriter().write(body);
         response.getWriter().flush();
+
     }
 }

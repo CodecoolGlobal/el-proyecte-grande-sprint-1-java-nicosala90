@@ -12,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private AuthenticationManagerDatabase authenticationManager;
+    private AuthenticationSuccessHandlerJwt authenticationSuccessHandlerJwt;
 
     @Autowired
     public SecurityConfig(AuthenticationManagerDatabase authenticationManager) {
