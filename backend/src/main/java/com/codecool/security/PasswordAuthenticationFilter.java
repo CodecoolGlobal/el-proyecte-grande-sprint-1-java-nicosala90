@@ -69,7 +69,7 @@ public class PasswordAuthenticationFilter extends UsernamePasswordAuthentication
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(Algorithm.HMAC512(SECRET.getBytes()));
 
-        String body = (actualUser.getUsername()) + " Bearer " + token;
+        String body =  "Bearer " + (actualUser.getUsername()) + " " + token;
 
         response.getWriter().write(body);
         response.getWriter().flush();

@@ -25,11 +25,18 @@ public class ClientController {
         return clientService.calculateBMI(clientData, id);
     }
 
-    @GetMapping("/bmi-list/{id}")
+   /* @GetMapping("/bmi-list/{id}")
     public List<BMI> getBMIValuesByClient(@PathVariable Long id) {
         return clientService.getBMIValuesSortByDate(id);
     }
-
+*/
+   @GetMapping("/api/client/bmi-list")
+   public List<BMI> getBmiList(@RequestHeader("Authorization") String authHeader) {
+       String token = authHeader.substring(7); // remove "Bearer " prefix
+       System.out.println("The token is: " + token);
+       //String username = JwtUtils.getUsernameFromJwtToken(token);
+       return null;
+   }
     //create
     @PostMapping("/add-client")
     public int addClient(@RequestBody Client newClient) {
