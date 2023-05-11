@@ -30,12 +30,11 @@ public class ClientController {
         return clientService.getBMIValuesSortByDate(id);
     }
 */
-   @GetMapping("/api/client/bmi-list")
+   @GetMapping("/bmi-list")
    public List<BMI> getBmiList(@RequestHeader("Authorization") String authHeader) {
-       String token = authHeader.substring(7); // remove "Bearer " prefix
+       String token = authHeader.substring(7);
        System.out.println("The token is: " + token);
-       //String username = JwtUtils.getUsernameFromJwtToken(token);
-       return null;
+       return clientService.getBMIValuesSortByDate(1L);
    }
     //create
     @PostMapping("/add-client")
