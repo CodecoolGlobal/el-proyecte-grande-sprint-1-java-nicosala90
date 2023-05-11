@@ -5,10 +5,12 @@ function Progress(clientName) {
   const [listBMI, setListBMI] = useState({});
 
   useEffect((clientId) => {
-    fetch(`/api/client/bmi-list/1`,
+    fetch(`/api/client/bmi-list`,
     {
       method: 'GET',
-      headers: `${localStorage.getItem('jwtToken')}`
+      headers: {
+        Authorization: `${localStorage.getItem('jwtToken')}`
+      }
     })
       .then(response => response.json())
       .catch(error => {
