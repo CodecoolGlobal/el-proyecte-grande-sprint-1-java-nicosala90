@@ -26,7 +26,7 @@ public class BackendApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        clientService.addClient(new Client("Arnold Swarczenegger", "valai@gmail.com", "password", LocalDate.now()));
+        clientService.addClient(new Client("who", "valai@gmail.com", "pass", LocalDate.of(1990,1,1)));
         clientService.saveBMI(new BMI(25.1,LocalDate.of(2021,1,1), new Client(1L)));
         clientService.saveBMI(new BMI(24.9,LocalDate.of(2021,2,1), new Client(1L)));
         clientService.saveBMI(new BMI(23.6,LocalDate.of(2021,3,1), new Client(1L)));

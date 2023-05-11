@@ -18,6 +18,7 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
@@ -26,43 +27,47 @@ public class PasswordAuthenticationFilter extends UsernamePasswordAuthentication
     public static final String SECRET = "SECRET_KEY";
     public static final long EXPIRATION_TIME = 900_000; // 15 mins
 
+    public AuthenticationManager authenticationManager;
+
     public PasswordAuthenticationFilter(AuthenticationManager authenticationManager) {
-        super(authenticationManager);
-        var authenticationSuccessHandler = new AuthenticationSuccessHandlerJwt();
-        this.setAuthenticationSuccessHandler(authenticationSuccessHandler);
+        this.authenticationManager = authenticationManager;
+        //super(authenticationManager);
+        // var authenticationSuccessHandler = new AuthenticationSuccessHandlerJwt();
+        //this.setAuthenticationSuccessHandler(authenticationSuccessHandler);
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
 
-        String username, password;
+        String clientName, password;
 
         try {
             Map<String, String> requestMap = new ObjectMapper().readValue(request.getInputStream(), Map.class);
-            username = requestMap.get("username");
+            clientName = requestMap.get("clientName");
             password = requestMap.get("password");
         } catch (IOException e) {
             throw new AuthenticationServiceException(e.getMessage(), e);
         }
 
         UsernamePasswordAuthenticationToken authRequest =
-                new UsernamePasswordAuthenticationToken(username, password);
+                new UsernamePasswordAuthenticationToken(clientName, password);
 
-        return this.getAuthenticationManager().authenticate(authRequest);
+        return authenticationManager.authenticate(authRequest);
     }
 
-
+    // amennyiben 200 security context-re rakja a és meghívja a
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain chain, Authentication authResult)
             throws IOException, ServletException {
+        User actualUser = new User(authResult.getPrincipal().toString(), authResult.getCredentials().toString(), new ArrayList<>());
         String token = JWT.create()
-                .withSubject(((User) authResult.getPrincipal()).getUsername())
+                .withSubject(actualUser.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(Algorithm.HMAC512(SECRET.getBytes()));
 
-        String body = ((User) authResult.getPrincipal()).getUsername() + "Bearer " + token;
+        String body = (actualUser.getUsername()) + "Bearer " + token;
 
         response.getWriter().write(body);
         response.getWriter().flush();

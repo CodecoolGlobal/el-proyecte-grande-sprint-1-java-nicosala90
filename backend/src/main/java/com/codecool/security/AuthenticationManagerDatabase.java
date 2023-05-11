@@ -27,15 +27,15 @@ public class AuthenticationManagerDatabase implements AuthenticationManager {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        //logger.info("Authentication Object: {}", authentication);
-        //logger.info("Type of principal : {}", authentication.getPrincipal().getClass());
+//        logger.info("Authentication Object: {}", authentication);
+//        logger.info("Type of principal : {}", authentication.getPrincipal().getClass());
         String username = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
         Client client = clientService.getClientByClientName(username);
         logger.info("client is: {}", client);
 
         //TODO hash + salt password
-        if(password.equals(client.getPassword())){
+        if (client != null && password.equals(client.getPassword())) {
             return new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), authentication.getCredentials());
         }
         throw new BadCredentialsException("Bad credentials");
