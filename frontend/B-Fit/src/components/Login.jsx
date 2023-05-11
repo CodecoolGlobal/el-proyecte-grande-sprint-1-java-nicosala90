@@ -1,9 +1,6 @@
 import { useState } from "react";
 function Login() {
 
-
-
-
     const [client, setClient] = useState({
         "clientName": "",
         "password": ""
@@ -48,13 +45,11 @@ function Login() {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
-                    return response.json();
+                    return response.text();
                 })
-                .then(data => {
-                    const token = data.token;
+                .then(token => {
+                    //the token is a string not a JSON object
                     localStorage.setItem('jwtToken', token);
-                    console.log("A qrvjó token: "+ localStorage.getItem('jwtToken'));
-                    // do something with the token, such as store it in local storage or a cookie
                 })
                 .catch(error => {
                     console.error('There was a problem with the fetch operation:', error);
