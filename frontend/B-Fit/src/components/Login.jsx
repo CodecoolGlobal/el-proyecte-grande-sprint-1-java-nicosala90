@@ -1,6 +1,9 @@
 import { useState } from "react";
 function Login() {
 
+
+
+
     const [client, setClient] = useState({
         "clientName": "",
         "password": ""
@@ -32,15 +35,31 @@ function Login() {
                 password: client.password
             };
 
-            fetch('/api/client/client-checker', {
+            fetch(`/api/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
+
                 body: JSON.stringify(clientData)
             })
-                .then(res => res.json())
-                .then(res => setValue(res));
+                
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const token = data.token;
+                    localStorage.setItem('jwtToken', token);
+                    console.log("A qrvjó token: "+ localStorage.getItem('jwtToken'));
+                    // do something with the token, such as store it in local storage or a cookie
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+
 
             setClient
                 ({
