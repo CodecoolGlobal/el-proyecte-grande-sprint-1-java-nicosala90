@@ -69,8 +69,8 @@ public class ClientService {
         bmiRepository.save(bmi);
     }
 
-    public List<BMI> getBMIValuesSortByDate(Long id) {
-        Client user = clientRepository.findById(id).orElseThrow(RuntimeException::new);
+    public List<BMI> getBMIValuesSortByDate(String clientName) {
+        Client user = clientRepository.findClientByClientName(clientName);
         return user.getBmiValues()
                 .stream()
                 .sorted(Comparator.comparing(BMI::getLocalDate))

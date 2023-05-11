@@ -32,9 +32,11 @@ public class ClientController {
 */
    @GetMapping("/bmi-list")
    public List<BMI> getBmiList(@RequestHeader("Authorization") String authHeader) {
-       String token = authHeader.substring(7);
-       System.out.println("The token is: " + token);
-       return clientService.getBMIValuesSortByDate(1L);
+       System.out.println(authHeader);
+       String[] tokenElement = authHeader.split(" ");
+       String clientName = tokenElement[0];
+       System.out.println(clientName);
+       return clientService.getBMIValuesSortByDate(clientName);
    }
     //create
     @PostMapping("/add-client")
