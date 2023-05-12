@@ -21,9 +21,9 @@ function NavBar() {
                         <i className="fa fa-caret-down"></i>
                     </button>
                     <div className="dropdown-content elements" >
-                        <Link className="link-component" to="/login">Login</Link>
                         <Link className="link-component" to="/signin">Sign In</Link>
-                        <Link className="link-component" to="/" onClick={handleLogOut}>Sign Out</Link> 
+                        <Link className="link-component" to="/login">Login</Link>
+                        <Link className="link-component" to="/" onClick={handleLogOut}>Log Out</Link> 
                     </div>
                 </div>
                 <Link className="link-component" to="/">Home</Link>
