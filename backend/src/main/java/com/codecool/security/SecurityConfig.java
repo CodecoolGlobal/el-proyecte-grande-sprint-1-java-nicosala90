@@ -23,7 +23,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .httpBasic().disable()
-                .formLogin().disable()
+                .formLogin().disable()//TODO JWT filter
                 .csrf().disable()
                 .addFilter(new PasswordAuthenticationFilter(authenticationManager))
                 .build();

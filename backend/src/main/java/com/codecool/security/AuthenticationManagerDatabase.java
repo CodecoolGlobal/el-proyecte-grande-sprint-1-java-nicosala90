@@ -15,16 +15,12 @@ import org.springframework.stereotype.Service;
 
 @Component
 public class AuthenticationManagerDatabase implements AuthenticationManager {
-
     private Logger logger = LoggerFactory.getLogger(getClass());
-
     private ClientService clientService;
-
     @Autowired
     public AuthenticationManagerDatabase(ClientService clientService) {
         this.clientService = clientService;
     }
-
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 //        logger.info("Authentication Object: {}", authentication);
