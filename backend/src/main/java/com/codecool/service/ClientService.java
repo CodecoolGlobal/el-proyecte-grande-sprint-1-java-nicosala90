@@ -28,7 +28,6 @@ public class ClientService {
         this.calculator = calculator;
     }
 
-
     public void addClient(Client client) {
         clientRepository.save(client);
     }
@@ -67,6 +66,11 @@ public class ClientService {
                 .stream()
                 .sorted(Comparator.comparing(BMI::getLocalDate))
                 .collect(Collectors.toList());
+    }
+
+    public int getClientAge(Long id){
+        return clientRepository.findById(id).orElseThrow(RuntimeException::new)
+                .calculateClientAge();
     }
 
 }

@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +46,10 @@ public class Client {
 
     public void addCalculatedBMI(BMI bmi) {
         bmiValues.add(bmi);
+    }
+
+    public int calculateClientAge(){
+        return Period.between(birthdayDate, LocalDate.now()).getYears();
     }
 
     @Override

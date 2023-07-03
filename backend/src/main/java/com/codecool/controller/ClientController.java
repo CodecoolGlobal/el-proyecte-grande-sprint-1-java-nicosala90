@@ -52,4 +52,9 @@ public class ClientController {
     public void deleteClientById(@PathVariable Long id) {
         clientService.deleteClient(id);
     }
+
+    @GetMapping("/client-age/{id}")
+    public int getClientAge(@PathVariable Long id){
+        return clientService.getClientAge(id);
+    }
 }
