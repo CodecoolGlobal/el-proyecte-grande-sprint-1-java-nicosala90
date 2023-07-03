@@ -11,6 +11,7 @@ function InputCard() {
         "height": ""
     })
     const [value, setValue] = useState(0);
+    const [age, setAge] = useState(0);
 
     function handleClientIdChange(e) {
         setClient
@@ -51,6 +52,16 @@ function InputCard() {
                 weight: parseFloat(client.weight),
                 height: parseFloat(client.height)
             };
+
+            fetch(`/api/client/client-age/${client.clientId}`)
+                .then(response => response.json())
+                .catch(error => {
+                    console.error('Error fetching client age:', error);
+                })
+                .then(data => {
+                    setAge(data);
+                    console.log(data)
+                })
 
             fetch(`/api/client/registeredBMI/${client.clientId}`, {
                 method: 'POST',
@@ -96,7 +107,7 @@ function InputCard() {
             </div>
             {value > 0 ?
                 <div id="result-table">
-                    <SemiCircleIndicator value={value} />
+                    <SemiCircleIndicator value={value} age={age} />
                 </div>
                 : <></>
             }

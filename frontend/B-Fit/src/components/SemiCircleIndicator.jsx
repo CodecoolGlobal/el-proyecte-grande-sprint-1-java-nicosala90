@@ -1,6 +1,7 @@
+import { useState } from "react";
 import ReactSpeedometer from "react-d3-speedometer"
 
-function SemiCircleIndicator({value}) {
+function SemiCircleIndicator({value, age}) {
   /*    Age	Underweight	Normal weight	Overweight	Obese	Severely obese
      18-24	<18.5		18.5-24.9	25-29.9	3	0-39.9		≥40
      25-34	<19		19-24.9		25-29.9		30-39.9		≥40
@@ -9,6 +10,9 @@ function SemiCircleIndicator({value}) {
      55-64	<22		22-24.9		25-29.9		30-39.9		≥40
      65-74	<23		23-24.9		25-29.9		30-39.9		≥40
      ≥75	<24		24-24.9		25-29.9		30-39.9		≥40 */
+
+   console.log(age)
+
   return (
     <div>
       <ReactSpeedometer
