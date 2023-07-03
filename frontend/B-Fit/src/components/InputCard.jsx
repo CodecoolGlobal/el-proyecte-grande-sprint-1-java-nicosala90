@@ -60,7 +60,6 @@ function InputCard() {
                 })
                 .then(data => {
                     setAge(data);
-                    console.log(data)
                 })
 
             fetch(`/api/client/registeredBMI/${client.clientId}`, {
