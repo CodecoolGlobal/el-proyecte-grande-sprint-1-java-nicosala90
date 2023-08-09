@@ -48,3 +48,5 @@ Backend (Java)
 #### Accessing the Application
 Once the Docker container is running, you can access the application using a web browser:
 -  Open http://localhost:8080 in your web browser.
+#### TODO
+The logged user features is under development!
